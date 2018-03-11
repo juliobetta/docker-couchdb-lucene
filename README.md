@@ -37,6 +37,7 @@ You can query couchdb-lucene directly instead.
 * `1.0.2`: CouchDB-Lucene 1.0.2
 * `1.1.0`: CouchDB-Lucene 1.1.0
 * `2.1.0`, `latest`: CouchDB-Lucene 2.1.0
+* `experimental`: Modified version of CouchDB-Lucene. Use it at your own risk!
 
 ## Further reading
 
