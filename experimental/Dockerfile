@@ -22,19 +22,19 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364
   && rm /usr/local/bin/gosu.asc \
   && chmod +x /usr/local/bin/gosu
 
-ENV COUCHDB_LUCENE_VERSION experimental
+ENV COUCHDB_LUCENE_VERSION v2.1.0-exp-1
 
 RUN apt-get update \
-  && apt-get install -y maven \
+  && apt-get install -y maven git-core \
   && cd /usr/src \
-  && curl -L https://github.com/juliobetta/couchdb-lucene/archive/$COUCHDB_LUCENE_VERSION.tar.gz | tar -xz \
-  && cd couchdb-lucene-$COUCHDB_LUCENE_VERSION \
-  && mvn
-
-RUN cd /usr/src/couchdb-lucene-$COUCHDB_LUCENE_VERSION/target \
-  && unzip couchdb-lucene-$COUCHDB_LUCENE_VERSION-dist.zip \
-  && mv couchdb-lucene-$COUCHDB_LUCENE_VERSION /opt/couchdb-lucene \
-  && rm -rf /usr/src/couchdb-lucene-*
+  && git clone https://github.com/juliobetta/couchdb-lucene \
+  && cd couchdb-lucene \
+  && git checkout ${COUCHDB_LUCENE_VERSION} \
+  && mvn \
+  && cd /usr/src/couchdb-lucene/target \
+  && unzip couchdb-lucene-experimental-SNAPSHOT-dist.zip \
+  && mv couchdb-lucene-experimental-SNAPSHOT /opt/couchdb-lucene \
+  && rm -rf /usr/src/couchdb-lucene
 
 RUN apt-get remove --auto-remove -y maven \
   && rm -rf /var/lib/apt/lists/* \
