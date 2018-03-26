@@ -22,7 +22,7 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364
   && rm /usr/local/bin/gosu.asc \
   && chmod +x /usr/local/bin/gosu
 
-ENV COUCHDB_LUCENE_VERSION v2.1.0-exp-2
+ENV COUCHDB_LUCENE_VERSION v2.1.0-exp-5
 
 RUN apt-get update \
   && apt-get install -y maven git-core \
